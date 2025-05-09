@@ -77,53 +77,53 @@ export default function Experience() {
           subtitle="My professional journey and the projects I've worked with."
         />
 
-        <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-primary/20 before:to-transparent">
+        <div className="mt-10 md:mt-16 space-y-10 md:space-y-16 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:ml-auto md:before:mr-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-primary/20 before:to-transparent">
           {experiences.map((experience, index) => (
             <motion.div
               key={experience.id}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="relative grid items-start grid-cols-1 md:grid-cols-5 md:gap-10"
+              className="relative grid grid-cols-1 md:grid-cols-5 gap-y-6 md:gap-x-10 items-start"
             >
-              {/* Left column - Timeline and title */}
-              <div className="md:col-span-2 flex flex-col items-start md:items-end md:text-right pb-4 md:pb-0">
-                <div className="relative flex items-center justify-start w-full md:justify-end mb-3">
-                  <div className="absolute left-0 md:right-0 md:left-auto ml-5 md:ml-0 md:mr-[-14px] h-7 w-7 rounded-full border border-primary/20 bg-background flex items-center justify-center z-10">
-                    <Briefcase className="h-3.5 w-3.5 text-primary" />
-                  </div>
-                  <time className="text-sm font-medium text-muted-foreground ml-12 md:ml-0 md:mr-6">
-                    {experience.period}
-                  </time>
-                </div>
-                <div className="ml-12 md:ml-0 md:mr-6">
-                  <h3 className="text-xl font-bold">{experience.role}</h3>
-                  <h4 className="text-primary font-medium">
-                    {experience.company}
-                  </h4>
-                </div>
+              {/* Timeline icon - Properly positioned for both mobile and desktop */}
+              <div className="absolute md:left-1/2 top-1 md:-top-4  md:-translate-x-1/2 h-7 w-7 rounded-full border border-primary/20 bg-background shadow-sm flex items-center justify-center z-10">
+                <Briefcase className="h-3.5 w-3.5 text-primary" />
               </div>
 
-              {/* Right column - Card with details */}
-              <Card className="md:col-span-3 border border-primary/10 bg-background/50 backdrop-blur-sm hover:shadow-md hover:border-primary/20 transition-all duration-300">
-                <CardContent className="p-4 sm:p-6">
-                  <p className="text-muted-foreground mb-4">
-                    {experience.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {experience.technologies.map((tech) => (
-                      <Badge
-                        key={tech}
-                        variant="secondary"
-                        className="bg-primary/10 hover:bg-primary/20 text-foreground"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              {/* Left column with period and titles */}
+              <div className="md:col-span-2 pl-12 md:pl-0 md:text-right md:pr-12">
+                <time className="text-sm font-medium text-muted-foreground block mb-2">
+                  {experience.period}
+                </time>
+                <h3 className="text-xl font-bold">{experience.role}</h3>
+                <h4 className="text-primary font-medium mt-1">
+                  {experience.company}
+                </h4>
+              </div>
+
+              {/* Right column with card */}
+              <div className="md:col-span-3 pl-12 md:pl-6">
+                <Card className="border border-primary/10 bg-background/50 backdrop-blur-sm hover:shadow-md hover:border-primary/20 transition-all duration-300">
+                  <CardContent className="p-4 sm:p-6">
+                    <p className="text-muted-foreground mb-4">
+                      {experience.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {experience.technologies.map((tech) => (
+                        <Badge
+                          key={tech}
+                          variant="secondary"
+                          className="bg-primary/10 hover:bg-primary/20 text-foreground"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </motion.div>
           ))}
         </div>

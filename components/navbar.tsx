@@ -9,13 +9,13 @@ import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
 const routes = [
+  { href: "#home", label: "Home" },
   { href: "#about", label: "About" },
   { href: "#tech-stack", label: "Tech Stack" },
   { href: "#projects", label: "Projects" },
   { href: "#experience", label: "Experience" },
   { href: "#education", label: "Education" },
   { href: "#certificates", label: "Certificates" },
-  { href: "#testimonials", label: "Testimonials" },
   { href: "#contact", label: "Contact" },
 ]
 
@@ -23,17 +23,45 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [activeSection, setActiveSection] = useState("")
 
   useEffect(() => {
     setMounted(true)
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
+      
+      const sections = routes.map(route => route.href.substring(1))
+      const currentSection = sections.find(section => {
+        const element = document.getElementById(section)
+        if (!element) return false
+        
+        const rect = element.getBoundingClientRect()
+        return rect.top <= 100 && rect.bottom >= 100
+      })
+      
+      setActiveSection(currentSection || "")
     }
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    setMobileMenuOpen(false)
+    
+    const targetId = href.substring(1)
+    const element = document.getElementById(targetId)
+    
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 80,
+        behavior: 'smooth'
+      })
+      setActiveSection(targetId)
+    }
+  }
 
   if (!mounted) {
     return null
@@ -54,11 +82,11 @@ export default function Navbar() {
             transition={{ duration: 0.5 }}
             className="text-primary"
           >
-            Portfolio
+            Mayank Piparde
           </motion.div>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
           {routes.map((route, index) => (
             <motion.div
               key={route.href}
@@ -66,8 +94,25 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
             >
-              <Link href={route.href} className="text-sm font-medium transition-colors hover:text-primary">
+              <Link 
+                href={route.href} 
+                className={cn(
+                  "text-sm font-medium transition-colors relative py-1",
+                  activeSection === route.href.substring(1) 
+                    ? "text-primary" 
+                    : "hover:text-primary"
+                )}
+                onClick={(e) => handleNavClick(e, route.href)}
+                aria-current={activeSection === route.href.substring(1) ? "page" : undefined}
+              >
                 {route.label}
+                {activeSection === route.href.substring(1) && (
+                  <motion.span 
+                    className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full" 
+                    layoutId="activeSection"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
               </Link>
             </motion.div>
           ))}
@@ -102,7 +147,7 @@ export default function Navbar() {
                   key={route.href}
                   href={route.href}
                   className="text-base font-medium py-2 transition-colors hover:text-primary"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, route.href)}
                 >
                   {route.label}
                 </Link>
