@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink } from "lucide-react";
+import { ChevronDown, ChevronUp, Github } from "lucide-react";
 import SectionHeading from "@/components/section-heading";
 
 const projects = [
@@ -48,7 +48,7 @@ const projects = [
       "Framer Motion",
       "REST API",
     ],
-    githubUrl: "#", // Replace when ready
+    githubUrl: "#",
   },
   {
     id: 3,
@@ -57,7 +57,7 @@ const projects = [
       "A role-based platform for creating, assigning, and managing tasks collaboratively with file and status tracking.",
     image: "/kaaryakram.png",
     tags: ["ReactJS", "Node.js", "MongoDB", "JWT", "Tailwind CSS", "REST API"],
-    githubUrl: "#", // Replace when ready
+    githubUrl: "#",
   },
   {
     id: 4,
@@ -66,7 +66,7 @@ const projects = [
       "An app for students to offer and request skills like design, development, and mentorship in a community format.",
     image: "/skill-exchange.png",
     tags: ["React Native", "Firebase", "Expo", "Tailwind CSS", "Firestore"],
-    githubUrl: "#", // Replace when ready
+    githubUrl: "#",
   },
   {
     id: 5,
@@ -81,12 +81,15 @@ const projects = [
       "NativeWind",
       "Expo",
     ],
-    githubUrl: "#", // Replace when ready
+    githubUrl: "#",
   },
 ];
 
 export default function Projects() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [showAll, setShowAll] = useState(false);
+
+  const displayedProjects = showAll ? projects : projects.slice(0, 3);
 
   return (
     <section id="projects" className="py-20 md:py-28">
@@ -96,8 +99,8 @@ export default function Projects() {
           subtitle="Here are some of my recent projects. Each project represents a unique challenge and solution."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-10">
-          {projects.map((project, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 lg:gap-10">
+          {displayedProjects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 50 }}
@@ -158,6 +161,33 @@ export default function Projects() {
             </motion.div>
           ))}
         </div>
+
+        {projects.length > 3 && (
+          <motion.div
+            className="flex justify-center mt-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            <Button
+              variant="outline"
+              className="border-primary/20 hover:bg-primary/5"
+              onClick={() => setShowAll(!showAll)}
+            >
+              {showAll ? (
+                <span className="flex items-center">
+                  Show Less
+                  <ChevronUp className="ml-2 h-4 w-4" />
+                </span>
+              ) : (
+                <span className="flex items-center">
+                  Show All ({projects.length - 3} more)
+                  <ChevronDown className="ml-2 h-4 w-4" />
+                </span>
+              )}
+            </Button>
+          </motion.div>
+        )}
       </div>
     </section>
   );

@@ -31,8 +31,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Navbar />
           <div className="relative flex min-h-screen flex-col">
-            <Navbar />
             <div className="flex-1">{children}</div>
             <Footer />
           </div>

@@ -26,7 +26,7 @@ export default function Hero() {
         <div className="absolute top-0 bottom-0 right-0 w-[1px] bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
       </div>
 
-      <div className="container relative z-10 flex flex-col items-center justify-center text-center gap-6 px-4">
+      <div className="container relative z-10 flex flex-col items-center justify-center text-center gap-4 px-4">
         {/* Profile image */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -150,7 +150,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll down indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+      <div className="absolute bottom-8 left-1/2 pl-4 transform -translate-x-1/2">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

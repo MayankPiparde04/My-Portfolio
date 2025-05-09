@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
 const routes = [
-  { href: "#home", label: "Home" },
+  { href: "/", label: "Home" },
   { href: "#about", label: "About" },
   { href: "#tech-stack", label: "Tech Stack" },
   { href: "#projects", label: "Projects" },
@@ -37,7 +37,7 @@ export default function Navbar() {
         if (!element) return false
         
         const rect = element.getBoundingClientRect()
-        return rect.top <= 100 && rect.bottom >= 100
+        return rect.top <= 150 && rect.bottom >= 150
       })
       
       setActiveSection(currentSection || "")
@@ -55,10 +55,7 @@ export default function Navbar() {
     const element = document.getElementById(targetId)
     
     if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80,
-        behavior: 'smooth'
-      })
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
       setActiveSection(targetId)
     }
   }
@@ -74,7 +71,7 @@ export default function Navbar() {
         isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border/40" : "bg-transparent",
       )}
     >
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex h-20 items-center justify-between">
         <Link href="/" className="font-bold text-xl">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
