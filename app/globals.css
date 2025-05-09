@@ -69,7 +69,8 @@
   /* Smooth theme transition */
   body,
   body * {
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-property: color, background-color, border-color,
+      text-decoration-color, fill, stroke;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;
   }
@@ -109,13 +110,24 @@
 
   .bg-grid {
     background-size: 40px 40px;
-    background-image: linear-gradient(to right, rgba(var(--primary-rgb), 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(var(--primary-rgb), 0.05) 1px, transparent 1px);
+    background-image: linear-gradient(
+        to right,
+        rgba(var(--primary-rgb), 0.05) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(var(--primary-rgb), 0.05) 1px,
+        transparent 1px
+      );
   }
 
   .bg-dots {
     background-size: 20px 20px;
-    background-image: radial-gradient(rgba(var(--primary-rgb), 0.1) 1px, transparent 1px);
+    background-image: radial-gradient(
+      rgba(var(--primary-rgb), 0.1) 1px,
+      transparent 1px
+    );
   }
 }
 
@@ -157,4 +169,21 @@
   100% {
     background-position: 0% 50%;
   }
+}
+
+@keyframes subtle-pulse {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-subtle-pulse {
+  background-size: 200% 200%;
+  animation: subtle-pulse 8s ease infinite;
 }
