@@ -145,7 +145,7 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <div className="relative w-full mt-auto pb-12 pl-3 flex flex-col items-center">
+      <div className="relative w-full mt-auto md:pb-12 lg:pb-14 pb-32 pl-3 flex flex-col items-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

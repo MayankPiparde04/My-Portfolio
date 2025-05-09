@@ -1,24 +1,31 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "@/app/globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import Navbar from "@/components/navbar"
-import Footer from "@/components/footer"
+import type React from "react";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "@/app/globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Full-Stack Developer",
-  description: "A modern portfolio showcasing my skills, projects, and experience as a full-stack developer.",
-  keywords: ["developer", "portfolio", "web development", "full-stack", "react", "next.js"],
-    generator: 'v0.dev'
-}
+  title: "Mayank Piparde | Full-Stack Developer",
+  description:
+    "A modern portfolio showcasing my skills, projects, and experience as a full-stack developer.",
+  keywords: [
+    "developer",
+    "portfolio",
+    "web development",
+    "full-stack",
+    "react",
+    "next.js",
+  ],
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -32,5 +39,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

@@ -12,10 +12,10 @@ import FloatingShapes from "@/components/floating-shapes"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Portfolio | Full-Stack Developer",
+  title: "Mayank Piparde | Full-Stack Developer",
   description: "A modern portfolio showcasing my skills, projects, and experience as a full-stack developer.",
   keywords: ["developer", "portfolio", "web development", "full-stack", "react", "next.js"],
-  authors: [{ name: "Your Name" }],
+  authors: [{ name: "Mayank Piparde" }],
 }
 
 export default function Home() {
